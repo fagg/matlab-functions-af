@@ -69,12 +69,10 @@ Y = V' * Xhat;
 % Set up the returns
 if nargout == 2
     varargout(1) = {V};
-end
-if nargout == 3
+elseif nargout == 3
     varargout(1) = {V};
     varargout(2) = {D};
-end
-if nargout == 4
+elseif nargout == 4
     varargout(1) = {V};
     varargout(2) = {D};
     varargout(3) = {mu};
