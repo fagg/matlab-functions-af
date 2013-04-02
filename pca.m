@@ -49,7 +49,7 @@ if N > M
     
     % Normalise and sort in descending order
     D = (N/M) * diag(D);
-    [dm, idx] = sort(D, 'descend');
+    [~, idx] = sort(D, 'descend');
 
 else
     % More samples than dimensions, vanilla PCA.
@@ -57,7 +57,7 @@ else
     [V,D] = eig(S);
     % Sort the eigenvalues in descending order
     D = diag(D);
-    [dm, idx] = sort(D, 'descend');
+    [~, idx] = sort(D, 'descend');
 end
 
 
