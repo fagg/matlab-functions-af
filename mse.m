@@ -18,6 +18,9 @@ function M = mse(varargin)
     if varargin == 2
         E = varargin{1} - varargin{2};
     end
+    if vargin == 1
+        E = varargin{1};
+    end
     N = size(E,1) * size(E,2);
     M = (1/N) * sum(E.^2);
 end
