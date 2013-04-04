@@ -18,7 +18,7 @@ What do these do?
 Can I borrow/steal/use these?
 -----------------------------
 
-Yep. Unless otherwise stated, do whatever the you like with them. On
+Yep. Unless otherwise stated, do whatever you like with them. On
 one condition: I make no guarantees of support, I'm not liable if you
 break something and I won't hold your hand.
 
