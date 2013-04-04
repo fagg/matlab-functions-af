@@ -23,6 +23,5 @@ one condition: I make no guarantees of support, I'm not liable if you
 break something and I won't hold your hand.
 
 That being said, if you have a legitimate bug report, suggestion,
-improvement or comment, please email me (ashton@fagg.id.au).
-
-"Patches Welcome".
+improvement or comment, please email me (ashton@fagg.id.au) - "patches
+welcome".
