@@ -14,3 +14,15 @@ What do these do?
 * pca\_recon.m - Reconstructs data that has been PCA'd.
 * snr.m - Calculates the Signal to Noise Ratio between two sets of data.
 * mse.m - Calculates the Mean Square Error between two sets of data.
+
+Can I borrow/steal/use these?
+-----------------------------
+
+Yep. Unless otherwise stated, do whatever the you like with them. On
+one condition: I make no guarantees of support, I'm not liable if you
+break something and I won't hold your hand.
+
+That being said, if you have a legitimate bug report, suggestion,
+improvement or comment, please email me (ashton@fagg.id.au).
+
+"Patches Welcome".
