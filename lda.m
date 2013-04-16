@@ -4,8 +4,8 @@
 % Ashton Fagg (ashton@fagg.id.au) - April 2013
 %
 % Input
-%   - X:    Input data
-%   - C:    
+%   - X:    Training data
+%   - C:    Class index vector 
 % Output
 %   - Y:    Projected data
 %   - V:    Eigenvectors of P (optional)
@@ -14,7 +14,7 @@
 
 function [Y, varargout] = lda(X,C)
 
-% Need to check if we have continuous class labe. i.e. can't have 1,2,5
+% Need to check if we have continuous class label. i.e. can't have 1,2,5
 % because it makes no sense.
 if (max(C) ~= size((unique(C)),2))
     error('LDA:classlabels','Class labels are not continuous.');
