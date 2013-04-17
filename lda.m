@@ -26,7 +26,7 @@ overall_mu = mean(X);
 
 % Compute between class scatter matrix -> Sb
 for i=1:Nc
-    idx = find(n==i);
+    idx = find(C==i);
     mu(i,:) = mean(X(idx,:),1);
 end
 mu = bsxfun(@minus, mu, overall_mu);
@@ -39,7 +39,7 @@ Sb = (1/Nc) * Sb;
 % Compute within class scatter matrix -> Sw
 Sw = zeros(size(Sb));
 for i=1:Nc
-    idx = find(n==i);
+    idx = find(C==i);
     d = bsxfun(@minus, X(idx,:), mu(i,:));
     Sw = Sw + (d'*d);
 end
@@ -51,7 +51,7 @@ Sw = (1/Nc) * Sw;
 
 [Vw, Dw] = eig(Sw);
 Vw = Vw';
-Dw = diag(Dw); 
+Dw = diag(Dw);
 [~, idx] = sort(Dw, 'descend');
 Dw = Dw(idx);
 
