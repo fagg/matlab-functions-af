@@ -5,19 +5,29 @@
 %
 % Input
 %   - X:    Training data
-%   - C:    Class index vector 
+%   - C:    Class index vector
+%   - conc: Energy concentration factor (optional) -> defaults to 0.99
 % Output
 %   - Y:    Projected data
 %   - V:    Eigenvectors of P (optional)
 %   - D:    Eigenvalues of P  (optional)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-function [Y, varargout] = lda(X,C)
+function [Y, varargout] = lda(X,C,varargin)
 
 % Need to check if we have continuous class label. i.e. can't have 1,2,5
 % because it makes no sense.
 if (max(C) ~= size((unique(C)),2))
     error('LDA:classlabels','Class labels are not continuous.');
+end
+
+if nargin == 3
+    conc = varargin{1};
+    if conc > 1
+        error('LDA:concentration','''conc'' can''t be greater than 1.');
+    end
+else
+    conc = 0.99;
 end
 
 Nc = max(C);
@@ -55,17 +65,16 @@ Dw = diag(Dw);
 [~, idx] = sort(Dw, 'descend');
 Dw = Dw(idx);
 
-% Find where the energy in the eigenvectors is most concentrated, use
+% Find where the energy in the eigenvectors is concentrated, use
 % this as a threshold for the projection.
 
-thresh = find((cumsum(Dw)/sum(Dw)) > 0.99);
+thresh = find((cumsum(Dw)/sum(Dw)) > conc);
 Dw = diag(Dw(1:thresh(1)));
 Vw = Vw(idx(1:thresh(1)),:);
 
 % Diagonalise according to Fukunaga, pg 31 eqns 2.93, 2.95, 2.96
-b = sqrt(inv(Dw));
-K = b * Vw * Sb * Vw' * b;
-K = (K + K') / 2; % make sure this is symmetrical, smooths out error
+K = sqrt(inv(Dw)) * Vw * Sb * Vw' * sqrt(inv(Dw));
+K = (K + K') / 2;
 
 % apply orthonormal transform to diagonalise K, see Fukunaga pg 33 eqn 2.97
 % onwards
@@ -81,9 +90,9 @@ D = diag(DK);
 W = W(idx,:);
 D = D(idx);
 
+% Set up the variable returns
 Y = X * W'; % projection
 
-% Set up the variable returns
 if nargout == 2
     varargout{1} = W;
 elseif nargout == 3
